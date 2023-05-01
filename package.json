@@ -1,0 +1,28 @@
+{
+  "name": "FAIMS3-QA",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "wdio run ./wdio.conf.ts",
+    "wdio": "wdio run ./wdio.conf.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/appium-service": "^8.10.1",
+    "@wdio/cli": "^8.10.1",
+    "@wdio/local-runner": "^8.10.1",
+    "@wdio/mocha-framework": "^8.10.1",
+    "@wdio/spec-reporter": "^8.10.1",
+    "appium": "^2.0.0-beta.66",
+    "chromedriver": "^113.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "wdio-chromedriver-service": "^8.1.1"
+  },
+  "dependencies": {
+    "appium-uiautomator2-driver": "^2.24.0"
+  }
+}
