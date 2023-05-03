@@ -6,6 +6,7 @@ export default defineConfig({
 
   e2e: {
     baseUrl: LOCAL,
+    testIsolation: false,
     //chromeWebSecurity: false,
     experimentalStudio: true,
     env: {
