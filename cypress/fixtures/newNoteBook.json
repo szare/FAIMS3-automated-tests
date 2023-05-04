@@ -1,6 +1,6 @@
 {
-  "projectName": "Using fixtures to represent data",
-  "Descripion": "hello@cypress.io",
-  "Lead": "Fixtures are a great way to mock data for responses to routes",
-  "LeadInstitutions": "Fixtures are a great way to mock data for responses to routes"
+  "projectName": "Test project Name",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel quam nisi. Aenean eget augue et mauris eleifend bibendum id sit amet velit. Aliquam vitae elementum ligula, ut pellentesque mi. ",
+  "lead": "Dayna Weldon",
+  "leadInstitution": "Test Institution"
 }
