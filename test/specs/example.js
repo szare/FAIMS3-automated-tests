@@ -4,4 +4,3 @@ describe('just for test inspector', () => {
         await className.click()
     })
 })
-
