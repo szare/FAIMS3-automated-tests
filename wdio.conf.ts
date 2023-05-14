@@ -67,10 +67,10 @@ export const config: Options.Testrunner = {
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
         platformName: 'Android',
-        'appium:deviceName': 'Pixel 4 API 33',
+        'appium:deviceName': 'Pixel 6 Pro API 33',
         'appium:app': path.join(process.cwd(),'app','android','app-debug.apk'),
-        'appium:automationName': 'UiAutomator2'
-        // browserName: 'Chrome', // or "Safari"
+        'appium:automationName': 'UiAutomator2',
+        // 'browserName': 'Chrome', // or "Safari"
         // 'appium:platformVersion': '12.0', // or "16.2" (for running iOS v16)
     }],
     //
