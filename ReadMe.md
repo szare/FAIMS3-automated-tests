@@ -7,7 +7,7 @@ You can use the following commands to run the tests:
 
 Run in the CLI environment:
 
-    npx wdio
+    npm run test
 
 
 ## check appium
@@ -24,7 +24,7 @@ You can use the following command to check whether the appium settings are corre
 
 Run in the CLI environment:
 
-    appium -p 4724
+    appium -p {PORT}
 
 
 
