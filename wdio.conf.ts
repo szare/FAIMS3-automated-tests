@@ -67,7 +67,7 @@ export const config: Options.Testrunner = {
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
         platformName: 'Android',
-        'appium:deviceName': 'Pixel 6 Pro API 33',
+        'appium:deviceName': 'Pixel 6 Pro API 33 main',
         'appium:app': path.join(process.cwd(),'app','android','app-debug.apk'),
         'appium:automationName': 'UiAutomator2',
         // 'browserName': 'Chrome', // or "Safari"
@@ -107,7 +107,7 @@ export const config: Options.Testrunner = {
     baseUrl: '',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 120000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
