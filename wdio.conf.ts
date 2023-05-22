@@ -70,7 +70,7 @@ export const config: Options.Testrunner = {
         'appium:deviceName': 'Pixel 6 Pro API 33 main',
         'appium:app': path.join(process.cwd(),'app','android','app-debug.apk'),
         'appium:automationName': 'UiAutomator2',
-        // 'browserName': 'Chrome', // or "Safari"
+        // browserName: 'Chrome'
         // 'appium:platformVersion': '12.0', // or "16.2" (for running iOS v16)
     }],
     //
@@ -120,7 +120,7 @@ export const config: Options.Testrunner = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium'],
+    services: ['appium','chromedriver'],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
