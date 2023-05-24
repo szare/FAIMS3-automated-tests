@@ -12,7 +12,7 @@ describe('just for test inspector', () => {
         const signInButton = (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View[2]/android.view.View[4]/android.widget.Button')).click()
         
 
-        await driver.pause(3000); // Pause for 3 second to load FAIMS3-Auth
+        await driver.pause(2000); // Pause for 3 second to load FAIMS3-Auth
         const returnToApp = (await $('//android.view.View[@content-desc="Return to App"]')).click()
         
         
@@ -20,12 +20,12 @@ describe('just for test inspector', () => {
         
         const sideBar = (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.widget.Button')).click()
         const newNoteBookBtn = (await $('//android.view.View[@content-desc="New Notebook"]')).click()
-        await driver.pause(3000); // Pause for 3 second    
+        await driver.pause(2000); // Pause for 3 second    
         const cr = (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.widget.Button')).click()
-        await driver.pause(3000); // Pause for 3 second 
+        await driver.pause(2000); // Pause for 3 second 
         })
 
-    it('New noteBook - INFO', async () => {
+    it('New noteBook', async () => {
             //? GENERAL
             //* fill Inputs
             const projectName = (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View[2]/android.view.View[3]/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View[1]/android.view.View/android.view.View[2]/android.widget.EditText')).setValue(newNoteBookFixture.projectName)
@@ -64,10 +64,57 @@ describe('just for test inspector', () => {
             const attach = (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View[2]/android.view.View[3]/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View')).click()
             await driver.pause(2000); // Pause for 2 second
             const selectImage = (await $('//android.view.ViewGroup[@content-desc="Caption bar of Files."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView')).click()
-            await driver.pause(5000); // Pause for 3 second to load image
+            await driver.pause(1000); // Pause for 3 second to load image
             
             //! GO TO NEXT
             const goToNextAttachment = (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View[2]/android.view.View[3]/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.widget.Button')).click()
+            
+            
+            //click on SECTION DEFINITION
+            await driver.pause(2000); // Pause for 1 second to load elements
+            await driver.touchAction({
+                action: "tap",
+                x: 360,
+                y: 810,
+              });
+
+            //click on component
+              await driver.pause(2000); // Pause for 1 second to load elements
+              await driver.touchAction({
+                  action: "tap",
+                  x: 174,
+                  y: 1218,
+                });
+
+            //click on input text component
+                await driver.pause(2000); // Pause for 1 second to load elements
+                await driver.touchAction({
+                    action: "tap",
+                    x: 664,
+                    y: 1278,
+                  });
+            //click on submit
+                  await driver.pause(2000); // Pause for 1 second to load elements
+                  await driver.touchAction({
+                      action: "tap",
+                      x: 855,
+                      y: 477,
+                    });
+
+                                //click on save noteBook
+                  await driver.pause(2000); // Pause for 1 second to load elements
+                  await driver.touchAction({
+                      action: "tap",
+                      x: 137,
+                      y: 556,
+                    });
 
     })
+
+    it('new Record', async () => {
+        await driver.pause(5000); // Pause for 1 second to load elements
+    //  const sidebar = (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.widget.Button')).click()
+    //  const newRecord= (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.widget.ListView[1]/android.widget.Button')).click()
+     
+})
 })
