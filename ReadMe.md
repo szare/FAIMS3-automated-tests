@@ -27,5 +27,12 @@ Run in the CLI environment:
     appium -p {PORT}
 
 
+### *Requirement*
+
+ 1. Before starting the tests, be sure to have a picture in the gallery
+    (you can use the emulator camera)
+    
+ 2. For the first time, be sure to log in to the FAIMS3 application so
+        that your Gmail is logged in on the device
 
 
