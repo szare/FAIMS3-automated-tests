@@ -171,6 +171,7 @@ describe("just for test inspector", () => {
       x: 137,
       y: 556,
     });
+    await driver.pause(10000); // Pause for 10 seconds to checking the output
   });
 
   // it('new Record', async () => {
