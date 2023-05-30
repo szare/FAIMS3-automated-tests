@@ -111,8 +111,8 @@ describe('just for test inspector', () => {
 
     })
 
-    it('new Record', async () => {
-        await driver.pause(5000); // Pause for 1 second to load elements
+    // it('new Record', async () => {
+    //     await driver.pause(5000); // Pause for 1 second to load elements
     //  const sidebar = (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.widget.Button')).click()
     //  const newRecord= (await $('//android.view.ViewGroup[@content-desc="Caption bar of FAIMS3."]/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.widget.ListView[1]/android.widget.Button')).click()
      
