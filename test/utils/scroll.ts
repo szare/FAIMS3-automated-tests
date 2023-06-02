@@ -5,3 +5,10 @@ export const scrollDown = async()=>{
     'release'
 ])
 }
+export const scrollUp = async()=>{
+    await driver.touchAction([ //Scroll up(for xPath)
+        { action: 'longPress', x: 0, y: 700 },
+        { action: 'moveTo', x: 0, y: 3700 },
+        'release'
+    ])
+}
