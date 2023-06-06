@@ -1,16 +1,19 @@
 import {newNoteBookFixture} from "../../fixture/newNoteBook";
-import {scrollDown, scrollUp} from "../utils/scroll";
+import {scrollDown, scrollDownMobileTabletCase, scrollUp, tapByCoordinates} from "../utils/scroll";
 import * as assert from "assert";
 
 /*Locators*/
-const timeOutElement = 30000
+const timeOutElement = 45000
+const projectNameNoteBookLocator='//android.widget.TextView[@text=\'Appium Testing Notebook\']'
 const homeSignIn = '//android.widget.TextView[@text=\'SIGN IN\']'
 const signInButtonLocator = '//android.widget.Button[@text=\'SIGN IN\']'
+const returnToAppLocator = '//*[@text=\'Return to App\']'
 //New NoteBook
 const projectNameLocator = '//*[@resource-id=\'name\']'
 const descriptionLocator = '//*[@resource-id=\'pre_description\']'
 const leadLocator = '//*[@resource-id=\'project_lead\']'
 const lead_institutionLocator = '//*[@resource-id=\'lead_institution\']'
+const primaryTabTextLocator = '//*[@resource-id=\'primarytab-1\']'
 
 const goToNextButtonLocator = '//android.widget.Button[@text=\'GO TO NEXT\']'
 /*Meta*/
@@ -20,9 +23,10 @@ const userRolesLocator = '//*[@resource-id=\'accessadded\']'
 const addUserRoleButtonLocator = '//*[@resource-id=\'AddUserRoleButton\']'
 /*Attachment*/
 //
-const attachFieldLocator = '//*[@resource-id=\'projectinfopanel-3\']/android.view.View/android.view.View'
+const attachFieldLocator = '//*[@resource-id=\'gotonext_info\']/../android.view.View[1]'
+
 const imageSearch = '//*[@resource-id=\'com.google.android.documentsui:id/search_chip_group\']/android.widget.CompoundButton'
-const imageRoot = '//*[@resource-id=\'com.google.android.documentsui:id/item_root\']'
+const imageRoot = '//*[@resource-id=\'com.google.android.documentsui:id/dir_list\']/*[1]'
 const goNextAttachLocator = '//*[@resource-id=\'gotonext_info\']'
 
 //Sections
@@ -46,13 +50,21 @@ const settingsTabLocator = '//*[@resource-id=\'notebook-tab-2\']'
 const recordsNoteBookLocator = '//*[@resource-id=\'notebook-records-tab-0\']'
 const draftsNoteBookTabLocator = '//*[@resource-id=\'notebook-records-tab-1\']'
 const refreshNoteBookLocator = '//android.widget.Button[@text=\'REFRESH\']'
+const newRecordButtonLocator = '//android.view.View[@content-desc="NEW RECORD"]'
 
 //User
-const currentUserLocator = '//android.widget.TextView[@text=\'CURRENT USER\']'
+const currentUserLocator = '//*[@text=\'CURRENT USER\']'
 
 //WorkSpace
 const activedLocator = '//android.widget.TabWidget/android.view.View[1]'
 const availableLocator = '//android.widget.TabWidget/android.view.View[2]'
+
+const activateButtonLocator = '//android.widget.Button[@text=\'ACTIVATE\'][1]'
+const activateButtonDialogCancelLocator = '//android.app.Dialog/android.widget.Button[1]'
+const activateButtonDialogActiveLocator = '//android.app.Dialog/android.widget.Button[2]'
+const syncCheckBoxLocator = '//android.widget.CheckBox'
+const syncButtonDialogCancelLocator = '//android.app.Dialog/android.widget.Button[1]'
+const syncButtonDialogActiveLocator = '//android.app.Dialog/android.widget.Button[2]'
 
 describe("just for test inspector", () => {
     it("sign-in", async () => {
@@ -70,7 +82,7 @@ describe("just for test inspector", () => {
         )
         await waitElementAndClick(signInButton, timeOutElement)
 
-        const returnToApp = (await $('//android.widget.TextView[@text=\'Return to App\']')
+        const returnToApp = (await $(returnToAppLocator)
         )
         await waitElementAndClick(returnToApp, timeOutElement)
 
@@ -87,34 +99,35 @@ describe("just for test inspector", () => {
         const backSideBarButton = (await $('//android.widget.Button'))
         await waitElementAndClick(backSideBarButton, timeOutElement)
 
-        const tabText = (await $('//*[@resource-id=\'primarytab-1\']'))
+        const tabText = (await $(primaryTabTextLocator))
         let tabTextGet = await waitElementAndGetText(tabText, timeOutElement)
 
         assert.equal(tabTextGet, 'DESIGN', 'Tabs not presented')
     });
 
     it("New noteBook", async () => {
-        //? GENERAL
-        //* fill Inputs
+        // GENERAL
         const projectName = (await $(projectNameLocator))
         await waitElementAndSendKeys(projectName, newNoteBookFixture.projectName, timeOutElement)
 
         await scrollDown()
 
         const desc = (await $(descriptionLocator))
+
         await waitElementAndSendKeys(desc, newNoteBookFixture.desc, timeOutElement)
 
         const lead = (await $(leadLocator))
+
         await waitElementAndSendKeys(lead, newNoteBookFixture.lead, timeOutElement)
 
         const leadInstitution = (await $(lead_institutionLocator))
         await waitElementAndSendKeys(leadInstitution, newNoteBookFixture.lead, timeOutElement)
 
-        // //! GO TO NEXT
+        // GO TO NEXT
         const goNextButton = (await $(goToNextButtonLocator))
         await waitElementAndClick(goNextButton, timeOutElement)
 
-        // //? META
+        // META
         const metaData = (await $(metaFieldLocator))
         await waitElementAndSendKeys(metaData, newNoteBookFixture.newMeta, timeOutElement)
 
@@ -139,42 +152,44 @@ describe("just for test inspector", () => {
         const searchImageRootButton = await $(imageRoot)
         await waitElementAndClick(searchImageRootButton, timeOutElement)
 
-        scrollDown()
+        await scrollDown()
+        //TODO Added specific scroll for tablet case will remove in future
+        await scrollDownMobileTabletCase()
         const goNextAttachButton = await $(goNextAttachLocator)
+
         await waitElementAndClick(goNextAttachButton, timeOutElement)
-
-
-        // //click on SECTION DEFINITION
+        //SECTION DEFINITION
+        await tapByCoordinates()
 
         const inheritAccess = await $(checkBoxAccessLocator)
         await waitElementAndClick(inheritAccess, timeOutElement)
         await waitElementAndClick(goNextAttachButton, timeOutElement)
 
-        scrollDown()
-
+        await scrollDown()
         const descField = await $(descriptionSection)
+
         await waitElementAndSendKeys(descField, 'Some desc', timeOutElement)
-        scrollDown()
+        await scrollDown()
+        await scrollDownMobileTabletCase()
 
         await waitElementAndClick(goNextAttachButton, timeOutElement)
 
         const inputTextField = await $(textFieldInput)
         await waitElementAndClick(inputTextField, timeOutElement)
 
-        scrollUp()
-
-
+        await scrollUp()
         const sub = await $(submitButtonLocator)
-        await waitElementAndClick(sub, timeOutElement)
 
+        await waitElementAndClick(sub, timeOutElement)
 
         const submitSave = await $(submitSaveButtonLocator)
         await waitElementAndClick(submitSave, timeOutElement)
-        scrollUp()
+        await scrollUp()
 
         const sideBar = (
             await $(menuLocator)
         )
+
         await waitElementAndClick(sideBar, timeOutElement)
 
         const newNoteBookBtn = (
@@ -183,7 +198,7 @@ describe("just for test inspector", () => {
         await waitElementAndClick(newNoteBookBtn, timeOutElement)
 
         const newNoteRecord = (
-            await $('//android.widget.TextView[@text=\'Appium Testing Notebook\']')
+            await $(projectNameNoteBookLocator)
         )
         let noteName = await waitElementAndGetText(newNoteRecord, timeOutElement)
 
@@ -199,84 +214,102 @@ describe("just for test inspector", () => {
         await waitElementAndClick(sideBar, timeOutElement)
 
         const newNoteRecord = (
-            await $('//android.widget.TextView[@text=\'Appium Testing Notebook\']')
+            await $(projectNameNoteBookLocator)
         )
 
         await waitElementAndClick(newNoteRecord, timeOutElement)
 
-      const backSideBarButton = (await $('//android.widget.Button'))
-      await waitElementAndClick(backSideBarButton, timeOutElement)
+        const backSideBarButton = (await $('//android.widget.Button'))
+        await waitElementAndClick(backSideBarButton, timeOutElement)
 
-      const infoTab = await $(infoTabLocator)
-      const settingsTab = await $(settingsTabLocator)
-      const recordTab = await $(recordsTabLocator)
+        const infoTab = await $(infoTabLocator)
+        const settingsTab = await $(settingsTabLocator)
+        const recordTab = await $(recordsTabLocator)
 
-      await waitElementAndClick(infoTab,timeOutElement)
-      await waitElementAndClick(settingsTab,timeOutElement)
-      await waitElementAndClick(recordTab,timeOutElement)
+        await waitElementAndClick(infoTab, timeOutElement)
+        await waitElementAndClick(settingsTab, timeOutElement)
+        await waitElementAndClick(recordTab, timeOutElement)
 
-      const drafts = await $(draftsNoteBookTabLocator)
-      const records = await $(recordsNoteBookLocator)
+        const drafts = await $(draftsNoteBookTabLocator)
+        const records = await $(recordsNoteBookLocator)
 
-      await waitElementAndClick(drafts,timeOutElement)
-      await waitElementAndClick(records,timeOutElement)
+        await waitElementAndClick(drafts, timeOutElement)
+        await waitElementAndClick(records, timeOutElement)
     })
 
-  it('Refresh notebook', async () => {
-      const refreshButton = await $(refreshNoteBookLocator)
-      await waitElementAndClick(refreshButton,timeOutElement)
-  })
+    it('Refresh notebook', async () => {
+        const refreshButton = await $(refreshNoteBookLocator)
+        await waitElementAndClick(refreshButton, timeOutElement)
+    })
 
-  it('User check page', async () => {
-    const sideBar = (
-        await $(menuLocator)
-    )
-    await waitElementAndClick(sideBar,timeOutElement)
+    it('User check page', async () => {
+        const sideBar = (
+            await $(menuLocator)
+        )
+        await waitElementAndClick(sideBar, timeOutElement)
 
-    const userMenu = await $(userMenuLocator)
-    await waitElementAndClick(userMenu,timeOutElement)
+        const userMenu = await $(userMenuLocator)
+        await waitElementAndClick(userMenu, timeOutElement)
 
-    const backSideBarButton = (await $('//android.widget.Button'))
-    await waitElementAndClick(backSideBarButton, timeOutElement)
+        const backSideBarButton = (await $('//android.widget.Button'))
+        await waitElementAndClick(backSideBarButton, timeOutElement)
 
-    const currentUser = await $(currentUserLocator)
-    let currentUserDisplay = await isElementPresent(currentUser, timeOutElement)
+        const currentUser = await $(currentUserLocator)
+        let currentUserDisplay = await isElementPresent(currentUser, timeOutElement)
 
-    assert.ok(currentUserDisplay,"Current user not presented")
-  })
+        assert.ok(currentUserDisplay, "Current user not presented")
+    })
 
-  it('Check workspace', async () => {
-    const sideBar = (
-        await $(menuLocator)
-    )
-    await waitElementAndClick(sideBar,timeOutElement)
+    it('Check workspace', async () => {
+        const sideBar = (
+            await $(menuLocator)
+        )
+        await waitElementAndClick(sideBar, timeOutElement)
 
-    const workSpace = await $(workSpaceMenuLocator)
-    await waitElementAndClick(workSpace,timeOutElement)
+        const workSpace = await $(workSpaceMenuLocator)
+        await waitElementAndClick(workSpace, timeOutElement)
 
-    const backSideBarButton = (await $('//android.widget.Button'))
-    await waitElementAndClick(backSideBarButton, timeOutElement)
+        const backSideBarButton = (await $('//android.widget.Button'))
+        await waitElementAndClick(backSideBarButton, timeOutElement)
 
+        const availableTab = await $(availableLocator)
+        const activedTab = await $(activedLocator)
+        let workSpaceTabs = await isElementPresent(availableTab, timeOutElement)
 
-    const availableTab = await $(availableLocator)
-    const activedTab = await $(activedLocator)
-    let workSpaceTabs = await isElementPresent(availableTab,timeOutElement)
+        await waitElementAndClick(availableTab, timeOutElement)
+        await waitElementAndClick(activedTab, timeOutElement)
 
-    await waitElementAndClick(availableTab,timeOutElement)
-    await waitElementAndClick(activedTab,timeOutElement)
+        assert.ok(workSpaceTabs, 'Workspaces tab not presented')
+    })
 
-    assert.ok(workSpaceTabs,'Workspaces tab not presented')
-  })
+    it('New record page opened', async () => {
+        const sideBar = (
+            await $(menuLocator)
+        )
+        await waitElementAndClick(sideBar, timeOutElement)
 
+        const newNoteRecord = (
+            await $(projectNameNoteBookLocator)
+        )
+
+        await waitElementAndClick(newNoteRecord, timeOutElement)
+
+        const backSideBarButton = (await $('//android.widget.Button'))
+        await waitElementAndClick(backSideBarButton, timeOutElement)
+
+        const newRecordButton = await $(newRecordButtonLocator)
+        await waitElementAndClick(newRecordButton, timeOutElement)
+    })
 
     async function waitElementAndClick(element: WebdriverIO.Element, timeout: number) {
         await element.waitForDisplayed({timeout: timeout})
         await element.click()
     }
 
-  async function isElementPresent(element: WebdriverIO.Element, timeout: number):Promise<boolean> {
-    return await element.waitForDisplayed({timeout: timeout})
-  }
+    async function isElementPresent(element: WebdriverIO.Element, timeout: number): Promise<boolean> {
+        return await element.waitForDisplayed({timeout: timeout})
+    }
+
     async function waitElementAndGetText(element: WebdriverIO.Element, timeout: number) {
         await element.waitForDisplayed({timeout: timeout})
         return await element.getText()
@@ -286,6 +319,4 @@ describe("just for test inspector", () => {
         await element.waitForDisplayed({timeout: timeout})
         await element.setValue(keys)
     }
-
-
 });
